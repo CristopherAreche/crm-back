@@ -3,19 +3,17 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 const dbFill = require("./controllers/utils/dbFill");
-const { config } = require("./config/config");
 
-//Local
-// const sequelize = new Sequelize(
-//   config.dbName,
-//   config.dbUser,
-//   config.dbPassword,
-//   {
-//     host: config.dbHost,
-//     dialect: "postgres",
-//     logging: false,
-//   }
-// );
+const dbname = process.env.DB_NAME;
+const dbuser = process.env.DB_USER;
+const dbpassword = process.env.DB_PASSWORD;
+
+// Local
+// const sequelize = new Sequelize(dbname, dbuser, dbpassword, {
+//   host: config.dbHost,
+//   dialect: "postgres",
+//   logging: false,
+// });
 
 // Remote
 const sequelize = new Sequelize(
