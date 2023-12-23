@@ -5,15 +5,21 @@ const path = require("path");
 const dbFill = require("./controllers/utils/dbFill");
 const { config } = require("./config/config");
 
+//Local
+// const sequelize = new Sequelize(
+//   config.dbName,
+//   config.dbUser,
+//   config.dbPassword,
+//   {
+//     host: config.dbHost,
+//     dialect: "postgres",
+//     logging: false,
+//   }
+// );
+
+// Remote
 const sequelize = new Sequelize(
-  config.dbName,
-  config.dbUser,
-  config.dbPassword,
-  {
-    host: config.dbHost,
-    dialect: "postgres",
-    logging: false,
-  }
+  `postgres://dbuser:nY70BdvpmUiHdxa7pFgYrAPohiGq7HNl@dpg-cm3j9qun7f5s73bpb7og-a.oregon-postgres.render.com/crm_db_d3db`
 );
 
 const basename = path.basename(__filename);
