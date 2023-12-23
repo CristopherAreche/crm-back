@@ -9,7 +9,6 @@ const product = require("../../models/product");
 const boss = require("../../models/boss");
 const relationships = require("./relationships");
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, PORT } = process.env;
-// console.log(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${PORT}/${DB_NAME}`);
 const database = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${PORT}/${DB_NAME}`,
   {
@@ -28,11 +27,10 @@ saleProduct(database);
 
 relationships(database);
 
-dbFill(database.models)
-  .then(() => {
-    console.log(
-      "Se ha llenado la base de datos"
-    );
-  });
+dbFill(database.models).then(() => {
+  console.log("Se ha llenado la base de datos");
+});
 
-database.sync().then(() => { console.log('Fin del proceso'); })
+database.sync().then(() => {
+  console.log("Fin del proceso");
+});
