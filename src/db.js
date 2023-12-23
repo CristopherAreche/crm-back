@@ -5,9 +5,16 @@ const path = require("path");
 const dbFill = require("./controllers/utils/dbFill");
 const { config } = require("./config/config");
 
-const sequelize = new Sequelize(config.dbName, config.dbUser, config.dbPassword, {
-  host: config.dbHost, dialect: 'postgres'
-});
+const sequelize = new Sequelize(
+  config.dbName,
+  config.dbUser,
+  config.dbPassword,
+  {
+    host: config.dbHost,
+    dialect: "postgres",
+    logging: false,
+  }
+);
 
 const basename = path.basename(__filename);
 
@@ -33,10 +40,6 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-// En sequelize.models están todos los modelos importados como propiedades
-// Para relacionarlos hacemos un destructuring
-// const { Dog } = sequelize.models;
-// const { Dog } = sequelize.models;
 const {
   Activity,
   Boss,
@@ -69,9 +72,9 @@ Feedback.belongsTo(Salesman, { foreignKey: "salesmanId" });
 Task.belongsTo(Client);
 Task.belongsTo(Salesman);
 
-// dbFill(sequelize.models).then(() => {
-//   console.log("Se ha ejecutado llenar en la linea 91 de db.js");
-// });
+dbFill(sequelize.models).then(() => {
+  console.log("Se ha ejecutado llenar en la linea 91 de db.js");
+});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
